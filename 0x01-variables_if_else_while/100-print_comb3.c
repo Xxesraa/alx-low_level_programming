@@ -4,14 +4,14 @@
  * main - Entry point
  *
  * Description: print all possible different
- *		combinations of two digit.
+ *		combinations of two digits.
  *
  * Return: Always 0 (Success)
 */
 
 int main(void)
 {
-	int digit1 = 0, gigit2;
+	int digit1 = 0, digit2;
 
 	while (digit1 <= 9)
 	{
