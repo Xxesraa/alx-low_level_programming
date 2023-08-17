@@ -1,4 +1,4 @@
-#include"main.h"
+#include "main.h"
 
 /**
  * print_square - prints a square Using the character #
@@ -7,6 +7,7 @@
  *
  * Return: always 0 (Success)
 */
+
 void print_square(int size)
 {
 	int r, c;
