@@ -4,6 +4,7 @@
  *
  * @x: square root of x
  *
+ * Return: square root of x
 */
 
 double _sqrt(double x)
@@ -42,6 +43,7 @@ void largest_prime_factor(long int num)
 		while (num % prmNu == 0)
 		{
 			num = num / prmNu;
+			largest = prmNu;
 		}
 	}
 
