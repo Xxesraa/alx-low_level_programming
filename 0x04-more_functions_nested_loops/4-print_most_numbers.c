@@ -5,6 +5,7 @@
  *
  * Return: Always 0 (Success)
 */
+
 void print_most_numbers(void)
 {
 	int x;
@@ -13,7 +14,7 @@ void print_most_numbers(void)
 	{
 		if (x == 2 || x == 4)
 			continue;
-		_putchar(x + 48)
+		_putchar(x + 48);
 	}
 	_putchar('\n');
 }
