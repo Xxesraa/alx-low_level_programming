@@ -2,8 +2,9 @@
 #include <stdio.h>
 /**
  * print_buffer -  function that prints a buffer
- * @b: string
- * @size: size of buffer
+ * @b: buffer
+ * @size: size
+ * Return: void
 */
 
 void print_buffer(char *b, int size)
@@ -38,7 +39,7 @@ void print_buffer(char *b, int size)
 
 			if (c < 32 || c > 132)
 			{
-				c = '-';
+				c = '.';
 			}
 			printf("%c", c);
 		}
