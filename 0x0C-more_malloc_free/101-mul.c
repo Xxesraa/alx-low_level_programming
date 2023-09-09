@@ -60,8 +60,7 @@ void errors(void)
 int main(int argc, char *argv[])
 {
 	char *s1, *s2;
-int l1, l2;
-	int l;
+int l1, l2, l;
 	int i, c, d1, d2;
 	int *result, a = 0;
 
@@ -81,32 +80,23 @@ int l1, l2;
 	for (i = 0; i <= l1 + l2; i++)
 		result[i] = 0;
 	for (l1 = l1 - 1; l1 >= 0; l1--)
-	{
-		d1 = s1[l1] - '0';
+	{ d1 = s1[l1] - '0';
 		c = 0;
 		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
-		{
-			d2 = s2[l2] - '0';
+		{ d2 = s2[l2] - '0';
 			c += result[l1 + l2 + 1] + (d1 * d2);
 			result[l1 + l2 + 1] = c % 10;
-
-			c /= 10;
-		}
-
+			c /= 10; }
 			if (c > 0)
-				result[l1 + l2 + 1] += c;
-		}
+				result[l1 + l2 + 1] += c; }
 		for (i = 0; i < l - 1; i++)
 		{
 			if (result[i])
 			a = 1;
 		if (a)
-		_putchar(result[i] + '0');
-	}
+		_putchar(result[i] + '0'); }
 	if (!a)
 		_putchar('0');
 	_putchar('\n');
 	free(result);
-
-	return (0);
-}
+	return (0); }
