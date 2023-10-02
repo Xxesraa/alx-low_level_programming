@@ -33,7 +33,7 @@ int main(int ac, char **av)
 
 	while ((b = read(ff, buf, READ_BUF_SIZE)) > 0)
 		if (write(tf, buf, b) != b)
-			dprintf(STDERR_FILENO, ERR_NOREAD, av[2]), exit(99);
+			dprintf(STDERR_FILENO, ERR_NOWRITE, av[2]), exit(99);
 	if (b == -1)
 		dprintf(STDERR_FILENO, ERR_NOREAD, av[1]), exit(98);
 
