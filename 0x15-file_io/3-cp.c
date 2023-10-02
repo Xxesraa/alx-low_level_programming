@@ -39,7 +39,7 @@ int main(int ac, char **av)
 
 	ff = close(ff);
 	tf = close(tf);
-	if (tf)
+	if (ff)
 		dprintf(STDERR_FILENO, ERR_NOCLSE, ff), exit(100);
 	if (tf)
 		dprintf(STDERR_FILENO, ERR_NOCLSE, tf), exit(100);
