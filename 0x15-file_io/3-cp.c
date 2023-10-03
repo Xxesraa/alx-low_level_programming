@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include "main.h"
 
+
 void check_IO_stat(int stat, int fd, char *filename, char mode);
 
 /**
@@ -14,6 +15,7 @@ void check_IO_stat(int stat, int fd, char *filename, char mode);
 int main(int argc, char *argv[])
 {
 	int s, d, n = 1024, w, cs, cd;
+	unsigned int m = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 	char buf[1024];
 
 	if (argc != 3)
@@ -23,7 +25,7 @@ int main(int argc, char *argv[])
 	}
 	s = open(argv[1], O_RDONLY);
 	check_IO_stat(s, -1, argv[1], 'o');
-	d = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC);
+	d = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, m);
 	check_IO_stat(d, -1, argv[2], 'w');
 	while (n == 1024)
 	{
