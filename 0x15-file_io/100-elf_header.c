@@ -107,6 +107,9 @@ void print_osabi(Elf64_Ehdr h)
 		case ELFOSABI_AIX:
 			printf("UNIX - AIX");
 			break;
+			case ELFOSABI_IRIX:
+			printf("UNIX - IRIX");
+			break;
 		case ELFOSABI_FREEBSD:
 			printf("UNIX - FreeBSD");
 			break;
@@ -257,7 +260,6 @@ int main(int ac, char **av)
 	print_data(h);
 	print_Version(h);
 	print_osabi(h);
-	print_osabi_more(h);
 	print_abiversion(h);
 	print_type(h);
 	print_entry(h);
