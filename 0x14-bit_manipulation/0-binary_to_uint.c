@@ -10,12 +10,11 @@ unsigned int binary_to_uint(const char *b)
 	unsigned int result = 0;
 	int len = strlen(b);
 	int i = 0;
-
+	
 	if (b == NULL)
 	{
 		return (0);
 	}
-
 
 	while (i < len)
 	{
@@ -29,3 +28,4 @@ unsigned int binary_to_uint(const char *b)
 
 	return (result);
 }
+
