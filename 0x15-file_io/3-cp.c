@@ -1,53 +1,62 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#define BUFFER_SIZE 1024
 
 /**
- * main - Copies the content of one file to another.
- * @ac: The number of arguments.
- * @av: An array of arguments.
+ * main - Copies the content of a file to another file.
+ * @argc: The argument count.
+ * @argv: The argument vector.
  *
- * Return: 0 on success, or an exit code on failure.
+ * Return: 0 on success, or the corresponding exit code on failure.
  */
-int main(int ac, char **av)
+int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, read_result, write_result;
-	char buffer[1024];
+	int fd_from, fd_to;
+	ssize_t read_bytes, write_bytes;
+	char buffer[BUFFER_SIZE];
 
-	if (ac != 3)
+	if (argc != 3)
 	{
-		dprintf(2, "Usage: %s file_from file_to\n", av[0]);
+		dprintf(2, "Usage: %s file_from file_to\n", argv[0]);
 		return (97);
 	}
-	fd_from = open(av[1], O_RDONLY);
+
+	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", av[1]);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
 		return (98);
 	}
 
-	fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR
-			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR
+			| S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd_to == -1)
 	{
-		dprintf(2, "Error: Can't write to %s\n", av[2]);
+		dprintf(2, "Error: Can't write to %s\n", argv[2]);
 		close(fd_from);
 		return (99);
 	}
 
-	while ((read_result = read(fd_from, buffer, 1024)) > 0)
+	while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		write_result = write(fd_to, buffer, read_result);
-		if (write_result == -1)
+		write_bytes = write(fd_to, buffer, read_bytes);
+		if (write_bytes == -1 || read_bytes != write_bytes)
 		{
-			dprintf(2, "Error: Can't write to %s\n", av[2]);
+			dprintf(2, "Error: Can't write to %s\n", argv[2]);
 			close(fd_from);
 			close(fd_to);
 			return (99);
 		}
 	}
 
-	if (read_result == -1)
+	if (read_bytes == -1)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", av[1]);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
 		close(fd_from);
 		close(fd_to);
 		return (98);
@@ -67,3 +76,4 @@ int main(int ac, char **av)
 
 	return (0);
 }
+
