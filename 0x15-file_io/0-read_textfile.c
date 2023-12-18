@@ -21,18 +21,18 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (filename == NULL)
 		return (0);
 
-	file_descriptor = popen(filename, O_RDONLY);
+	file_descriptor = open(filename, O_RDONLY);
 	if (file_descriptor == -1)
 		return (0);
 
 	buffer = malloc(sizeof(char) * letters);
 	if (buffer == NULL)
 	{
-		pclose(file_descriptor);
+		close(file_descriptor);
 		return (0);
 	}
 
-	read_result = fread(file_descriptor, buffer, letters);
+	read_result = read(file_descriptor, buffer, letters);
 	if (read_result == -1)
 	{
 		free(buffer);
@@ -40,7 +40,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 
-	write_result = fwrite(STDOUT_FILENO, buffer, read_result);
+	write_result = write(STDOUT_FILENO, buffer, read_result);
 	if (write_result == -1 || (size_t)write_result != letters)
 	{
 		free(buffer);
